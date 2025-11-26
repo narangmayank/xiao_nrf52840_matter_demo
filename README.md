@@ -1,15 +1,43 @@
 # XIAO nRF52840 Matter Demo
 
 This repo contains everything you need to get started with matter on XIAO nRf52840.
-Lets get started quickly,
+Lets 
 
-- **xiao_nrf52840_light_bulb**: Matter Light bulb FW for XIAO nRf52840 board
+For matter over thread demo first step is to step up Open thread border router to create the thread netowrk, node commisioning and communicate between the nodes.
 
-- **coprocessor**: Thread radio coprocessor FW for nRF52840DK. Follow instrcution below to run the OTBR
+For this demo we will be running the openthread host on the linux machince preferably ubuntu. Lets get started quickly :-
 
-After flashing the FWs, please follow the below instructions to run this demo -:
+## Hardware Setup & FW Flashing
 
-## Open Thread Bourder Router
+Flash the below FWs to respective hardwares and once done please follow the below instructions to run this demo -:
+
+- **xiao_nrf52840_light_bulb**: Matter Light bulb FW for XIAO nRf52840 board. Use below commands to build and flash the FW file. Connect the LED strip to D2 pin connector of XIAO board.
+
+```bash
+# Build cmd
+west build -p -b xiao_ble/nrf52840/sense
+
+# Flash cmd
+west flash --erase
+```
+
+- **coprocessor**: Thread radio coprocessor FW for nRF52840DK. Use below commands to build and flash the FW file.
+
+```bash
+# Build cmd
+west build -p -b nrf52840dk/nrf52840
+
+# Build cmd
+west flash --erase
+
+# Disable JLINK mass storage (from JLink Commander)
+MSDDisable
+
+# Force Hardware Flow Control to avoid potential race conditions (from JLink Commander)
+SetHWFC Force
+```
+
+## Setup OTBR (Open Thread Bourder Router)
 
 ``` bash
 # Install docker
@@ -36,7 +64,7 @@ sudo docker run -it --rm --privileged --name otbr --network otbr -p 8080:80 \
 sudo ip -6 route add fd11:22::/64 dev otbr0 via fd11:db8:1::2
 ```
 
-## Checking OTBR Status
+## Check OTBR Running Status
 
 ```bash
 # Check the OTBR running status
