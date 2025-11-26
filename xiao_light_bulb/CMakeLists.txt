@@ -33,6 +33,7 @@ target_sources(app PRIVATE
     src/main.cpp
     src/zcl_callbacks.cpp
     src/user_led.cpp
+    src/led_strip.cpp
 )
 
 chip_configure_data_model(app

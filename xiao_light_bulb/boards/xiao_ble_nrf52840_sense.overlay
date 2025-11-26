@@ -4,6 +4,10 @@
  * SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
  */
 
+#include <zephyr/dt-bindings/led/led.h>
+
+#include "../nrf52-bindings.h"
+
 / {
 	chosen {
 		nordic,pm-ext-flash = &p25q16h;
@@ -18,16 +22,6 @@
 
 	chosen {
 		zephyr,entropy = &rng;
-	};
-
-	leds {
-		compatible = "gpio-leds";
-
-		user_led: user_led {
-			gpios = <&gpio0 29 GPIO_ACTIVE_HIGH>;
-			label = "User LED";
-			status = "okay";
-		};
 	};
 
 	buttons {
@@ -49,8 +43,8 @@
 	* including its brightness level.
 	*/
 	aliases {
-		user-led = &user_led;
 		pwm-led1 = &pwm_led1;
+		led-strip = &led_strip;
 	};
 
 	pwmleds {
@@ -61,10 +55,49 @@
 
 };
 
+&spi2 {
+	compatible = "nordic,nrf-spim";
+
+	led_strip: ws2812@0 {
+		compatible = "worldsemi,ws2812-spi";
+
+		/* SPI */
+		reg = <0>; /* ignored, but necessary for SPI bindings */
+		spi-max-frequency = <SPI_FREQ>;
+
+		/* WS2812 */
+		chain-length = <16>; /* arbitrary; change at will */
+		color-mapping = <LED_COLOR_ID_GREEN
+				 LED_COLOR_ID_RED
+				 LED_COLOR_ID_BLUE>;
+		spi-one-frame = <ONE_FRAME>;
+		spi-zero-frame = <ZERO_FRAME>;
+	};
+};
+
 &pwm0 {
 	pinctrl-0 = <&pwm0_default_alt>;
 	pinctrl-1 = <&pwm0_sleep_alt>;
 	pinctrl-names = "default", "sleep";
+};
+
+&pinctrl {
+	spi2_default: spi2_default {
+		group1 {
+				psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+						<NRF_PSEL(SPIM_MOSI, 0, 28)>,
+						<NRF_PSEL(SPIM_MISO, 1, 14)>;
+		};
+	};
+
+	spi2_sleep: spi2_sleep {
+		group1 {
+				psels = <NRF_PSEL(SPIM_SCK, 1, 13)>,
+						<NRF_PSEL(SPIM_MOSI, 0, 28)>,
+						<NRF_PSEL(SPIM_MISO, 1, 14)>;
+				low-power-enable;
+		};
+	};
 };
 
 &pinctrl {

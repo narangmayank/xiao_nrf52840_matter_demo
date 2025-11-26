@@ -16,7 +16,7 @@ int main()
 {
 	// initialize user led
 	user_led_init();
-	
+
 	CHIP_ERROR err = AppTask::Instance().StartApp();
 
 	LOG_ERR("Exited with code %" CHIP_ERROR_FORMAT, err.Format());
