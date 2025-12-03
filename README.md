@@ -47,8 +47,8 @@ This is pretty simple, attach the XIAO nRF52840 Board to grove base board and co
 **Using pre-compiled binary**
 
 ```bash
-# Flash hex file using nrfjprog (Use hex\xiao_nrf52840_merged.hex if not using Sense)
-$ nrfjprog -f nrf52 --program hex\xiao_nrf52840_sense_merged.hex --sectorerase
+# Flash hex file using nrfjprog (Use hex\xiao_nrf52840_sense_light_bulb_merged.hex if using sense board)
+$ nrfjprog -f nrf52 --program hex\xiao_nrf52840_light_bulb_merged.hex --sectorerase
 
 # Reset to apply the new FW
 $ nrfjprog --reset
@@ -62,8 +62,8 @@ OR
 # Step into matter light node project
 $ cd xiao_light_bulb
 
-#  Build the light bulb sample (change target to xiao_ble/nrf52840 if not using Sense)
-$ west build -p -b xiao_ble/nrf52840/sense
+#  Build the light bulb sample (change target to xiao_ble/nrf52840/sense if using sense board)
+$ west build -p -b xiao_ble/nrf52840
 
 # Flash the binary
 $ west flash --erase
@@ -90,14 +90,30 @@ Give executbale permision via `chmod +x ./chip-tool_x64`
 
 Usage `./chip-tool_x64`
 
-### Commision the light node
+### Commission the Light Node
+
+Before running any Matter commands, you must **commission the node to the thread network**. Use the following command to commission your node
+
+**Notes on parameters:**
+
+* `node_id` is user-configurable and you can use any unique integer to identify your device on the network (e.g., 1, 2, etc.)
+* `operational_dataset_hex` is obtained from the **OTBR Setup**
+* `pincode` is  specific to the node firmware. For the Matter Light Bulb node, the default is **20202021**
+* `discriminator` is specific to the node firmware. For the Matter Light Bulb node, the default is **3840**
 
 ```bash
-# Matter node commissioning via BLE (Use operational dataset hex collected from setup otbr guide)
+# Matter thread node commissioning via BLE
 ./chip-tool_x64 pairing ble-thread <node_id> hex:<operational_dataset_hex> <pincode> <discriminator>
 ```
 
-### Control the light node
+### Control the Light Node
+
+Once the node is commissioned, you can control it using standard Matter OnOff cluster commands
+
+**Notes on parameters:**
+
+- `node_id` is assigned during commissioning  
+- `endpoint_id` is specific to the node firmware. For the Matter Light Bulb node, the default is **1**.
 
 ```bash
 # Turn ON LED

@@ -12,7 +12,7 @@ We just need to connect nRF52840 DK hardware to the linux PC. Use Segger J-Link 
 
 ```bash
 # Flash hex file using nrfjprog
-$ nrfjprog -f nrf52 --program hex\coprocessor_merged.hex --sectorerase
+$ nrfjprog -f nrf52 --program hex\nrf52840dk_coprocessor_merged.hex --sectorerase
 
 # Reset to apply the new FW
 $ nrfjprog --reset
@@ -27,7 +27,7 @@ OR
 $ cd coprocessor
 
 #  Build the coprocessor sample
-$ west build -p -b  nrf52840dk/nrf52840
+$ west build -p -b nrf52840dk/nrf52840
 
 # Flash the binary
 $ west flash --erase
@@ -95,7 +95,7 @@ sudo docker exec -it otbr sh -c "sudo ot-ctl state"
 
 ### Collect Network Operational Dataset
 
-Now that your thread network is up and running and you need collect the network operational dataset hex value (i.e We will be using this during device commisioning)
+Now that your thread network is up and running and you need collect the network operational dataset hex value (i.e We will be using this during node commisioning)
 
 ```bash
 # Get the thread operational dataset hex
