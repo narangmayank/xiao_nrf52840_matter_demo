@@ -6,7 +6,7 @@ Let's Create a Thread network using OTBR host on Linux (Ubuntu recommended) with
 
 We just need to connect nRF52840 DK hardware to the linux PC. Use Segger J-Link USB port and you're done.
 
-### Flash the firmware
+### Flashing firmware
 
 **Using pre-compiled binary (Recommended for easy start)**
 

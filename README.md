@@ -1,6 +1,6 @@
 # XIAO nRF52840 Matter Demo
 
-Run a Matter light bulb application on XIAO nRF52840 with Thread connectivity via an OpenThread Border Router (OTBR).
+This repo contains everything you need to get started with matter on XIAO nRf52840 Series.
 
 ## Prerequisites
 
@@ -36,19 +36,19 @@ Lets get started now :)
 
 ## 1. Matter Light Node
 
-Here I'm using for XIAO nRF52840 Sense for demo. In case you are using XIAO nRF52840 change the target accordingly. 
+Here I'm using for XIAO nRF52840 Sense for demo. In case you are using XIAO nRF52840 board apply the changes accordingly, mentioned in comments for your ease. 
 
 ### Prepare the hardware
 
 This is pretty simple, attach the XIAO nRF52840 Board to grove base board and connect the grove RGB LED ring to D2 pin. Once done, your hardware setup will look like below,
 
-### Flash the firmware
+### Flashing firmware
 
 **Using pre-compiled binary**
 
 ```bash
-# Flash hex file using nrfjprog (Use hex\xiao_nrf52840_sense_light_bulb_merged.hex if using sense board)
-$ nrfjprog -f nrf52 --program hex\xiao_nrf52840_light_bulb_merged.hex --sectorerase
+# Flash hex file using nrfjprog (Use hex\xiao_nrf52840_light_bulb_merged.hex for XIAO nRF52840 board)
+$ nrfjprog -f nrf52 --program hex\xiao_nrf52840_sense_light_bulb_merged.hex --sectorerase
 
 # Reset to apply the new FW
 $ nrfjprog --reset
@@ -62,8 +62,8 @@ OR
 # Step into matter light node project
 $ cd xiao_light_bulb
 
-#  Build the light bulb sample (change target to xiao_ble/nrf52840/sense if using sense board)
-$ west build -p -b xiao_ble/nrf52840
+#  Build the light bulb sample (Use xiao_ble/nrf52840 for  XIAO nRF52840 board)
+$ west build -p -b xiao_ble/nrf52840/sense
 
 # Flash the binary
 $ west flash --erase
@@ -77,20 +77,20 @@ Please follow the instructions in [OTBR_SETUP.md](./OTBR_Setup.md) to set up the
 
 Once OTBR is running and the Thread network is established, proceed with the matter controller node setup below to commission and control the Matter light node.
 
-## 3. Setup Matter Controller Node
+## 3. Matter Controller Node
 
 We will be using matter chip tool as a matter controller node to run this demo.
 
-### Get the Chip tool Binary
+### Get the Chip Tool Binary
 
 Download the latest chip tool binary for linux from the below github
 https://github.com/nrfconnect/sdk-connectedhomeip/releases
 
-Give executbale permision via `chmod +x ./chip-tool_x64`
+Give executbale permission via `chmod +x ./chip-tool_x64`
 
 Usage `./chip-tool_x64`
 
-### Commission the Light Node
+### Node Commissioning
 
 Before running any Matter commands, you must **commission the node to the thread network**. Use the following command to commission your node
 
@@ -106,7 +106,7 @@ Before running any Matter commands, you must **commission the node to the thread
 ./chip-tool_x64 pairing ble-thread <node_id> hex:<operational_dataset_hex> <pincode> <discriminator>
 ```
 
-### Control the Light Node
+### Control the Matter Light Node
 
 Once the node is commissioned, you can control it using standard Matter OnOff cluster commands
 
