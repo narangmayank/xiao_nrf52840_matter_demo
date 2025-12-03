@@ -40,7 +40,7 @@ Here I'm using for XIAO nRF52840 Sense for demo. In case you are using XIAO nRF5
 
 ### Prepare the hardware
 
-Attach the XIAO nRF52840 Sense Board to Grove base board and connect the Grove ove RGB LED ring to D2 pin extension. Once done, the matter light node hardware will look like below,
+Attach the XIAO nRF52840 Sense Board to Grove base board and connect the Grove ove RGB LED ring to D2 pin extension. Once done, the matter light node hardware would look like below,
 
 ![Matter Light Node](media/matter_light_node.jpg)
 
@@ -73,7 +73,7 @@ $ west build -p -b xiao_ble/nrf52840/sense
 $ west flash --erase
 ```
 
-Once done, You should see XIAO inbuilt RGB light blinking (BLUE) which means matter light node firmware is running now, started bluetooth advertising by `Matter_Light` name and waiting for commisioning.
+Once done, You should see XIAO inbuilt RGB light blinking (BLUE) indicating matter light node firmware is running now, started bluetooth advertising with `MatterLight` name and waiting for commisioning.
 
 ## 2. Setup OTBR (OpenThread Border Router)
 
@@ -110,7 +110,7 @@ Before running any Matter commands, you must **commission the node to the thread
 ./chip-tool_x64 pairing ble-thread <node_id> hex:<operational_dataset_hex> <pincode> <discriminator>
 ```
 
-### Control the Matter Light Node
+### Controlling Matter Light Node
 
 Once the node is commissioned, you can control it using standard Matter OnOff cluster commands
 
