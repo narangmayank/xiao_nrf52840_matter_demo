@@ -4,9 +4,11 @@ Let's Create a Thread network using OTBR host on Linux (Ubuntu recommended) with
 
 ### Prepare the hardware
 
-We just need to connect nRF52840 DK hardware to the linux PC. Use Segger J-Link USB port and you're done.
+This is pretty simple, Just connect nRF52840 DK hardware to the linux PC using Segger J-Link USB port.
 
 ### Flashing firmware
+
+You can either flash the pre-compiled binaries provided in the `hex` directory or you can build the firmware yourself. Use pre-compiled HEX files for your target to get started quickly
 
 **Using pre-compiled binary (Recommended for easy start)**
 
@@ -50,7 +52,7 @@ Now thread radio hardware is ready, you can follow below instructions to setup t
 ### Configure the Border Router
 
 ``` bash
-# Install pre-requisites docker
+# Install pre-requisites and docker
 sudo apt update && sudo apt install docker.io
 
 # Start docker
@@ -83,7 +85,7 @@ You should see Form operation is successfull.
 
 ### Check OTBR Running Status
 
-Finally hread network is created you can check the running status anytime using below commands,
+Finally thread network is created you can check the running status anytime using below commands,
 
 ```bash
 # Check the OTBR running status

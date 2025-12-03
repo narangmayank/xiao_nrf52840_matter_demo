@@ -1,6 +1,6 @@
 # XIAO nRF52840 Matter Demo
 
-This repo contains everything you need to get started with matter on XIAO nRf52840 Series.
+This repo contains everything you need to get started with matter on XIAO nRf52840 Series
 
 ## Prerequisites
 
@@ -9,7 +9,7 @@ This repo contains everything you need to get started with matter on XIAO nRf528
     * USB Type C Cable
     * Micro USB Cable
     * XIAO nRF52840 Or XIAO nRF52840 Sense board
-    * nnRF52840 DK (i.e Thread radio coprocessor)
+    * nRF52840 DK (i.e Thread radio coprocessor)
     * [Seeed Studio Grove Base for XIAO](https://www.seeedstudio.com/Grove-Shield-for-Seeeduino-XIAO-p-4621.html)
     * [Grove - RGB LED Ring (20 - WS2813 Mini)
 ](https://www.seeedstudio.com/Grove-RGB-LED-Ring-20-WS2813-Mini.html)
@@ -40,9 +40,13 @@ Here I'm using for XIAO nRF52840 Sense for demo. In case you are using XIAO nRF5
 
 ### Prepare the hardware
 
-This is pretty simple, attach the XIAO nRF52840 Board to grove base board and connect the grove RGB LED ring to D2 pin. Once done, your hardware setup will look like below,
+Attach the XIAO nRF52840 Sense Board to Grove base board and connect the Grove ove RGB LED ring to D2 pin extension. Once done, the matter light node hardware will look like below,
+
+![Matter Light Node](media/matter_light_node.jpg)
 
 ### Flashing firmware
+
+You can either flash the pre-compiled binaries provided in the `hex` directory or you can build the firmware yourself. Use pre-compiled HEX files for your target to get started quickly
 
 **Using pre-compiled binary**
 
@@ -62,7 +66,7 @@ OR
 # Step into matter light node project
 $ cd xiao_light_bulb
 
-#  Build the light bulb sample (Use xiao_ble/nrf52840 for  XIAO nRF52840 board)
+#  Build the light bulb sample (Use xiao_ble/nrf52840 for XIAO nRF52840 board)
 $ west build -p -b xiao_ble/nrf52840/sense
 
 # Flash the binary
